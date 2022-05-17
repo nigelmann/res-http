@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  static:
+    build: ../step1
+  dynamic:
+    build: ../step2
+  rp:
+    build: .
+    ports:
+     - "8080:80"
+    links:
+     - static
+     - dynamic
