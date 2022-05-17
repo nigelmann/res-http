@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  static:
+    build: ../step1
+    deploy:
+      replicas: 3
+    labels:
+     - traefik.http.routers.static.rule=PathPrefix(`/static`)
+     - traefik.http.routers.static.middlewares=static-stripprefix
+     - traefik.http.middlewares.static-stripprefix.stripprefix.prefixes=/static
+     - traefik.http.services.static.loadbalancer.server.port=80
+  dynamic:
+    build: ../step2
+    deploy:
+      replicas: 2
+    labels:
+     - traefik.http.routers.dynamic.rule=PathPrefix(`/dynamic`)
+     - traefik.http.routers.dynamic.middlewares=dynamic-stripprefix
+     - traefik.http.middlewares.dynamic-stripprefix.stripprefix.prefixes=/dynamic
+     - traefik.http.services.dynamic.loadbalancer.server.port=3000
+  reverse-proxy:
+    image: traefik:v2.6
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
