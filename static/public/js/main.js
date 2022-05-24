@@ -1,5 +1,12 @@
-
 const element = document.querySelector('.current-time')
+
+document.addEventListener('DOMContentLoaded', () => {
+    var req = new XMLHttpRequest();
+    req.open('GET', document.location, false);
+    req.send(null);
+    var headers = req.getAllResponseHeaders().toLowerCase();
+    console.log(headers);
+})
 
 window.setInterval(() => {
     fetch('/dynamic/now/')
