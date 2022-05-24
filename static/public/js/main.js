@@ -1,11 +1,11 @@
 const element = document.querySelector('.current-time')
+const serverElement = document.querySelector('#current-server')
 
 document.addEventListener('DOMContentLoaded', () => {
-    var req = new XMLHttpRequest();
+    const req = new XMLHttpRequest();
     req.open('GET', document.location, false);
     req.send(null);
-    var headers = req.getAllResponseHeaders().toLowerCase();
-    console.log(headers);
+    serverElement.innerText = req.getResponseHeader("x-hostname");
 })
 
 window.setInterval(() => {
