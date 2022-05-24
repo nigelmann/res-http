@@ -1,5 +1,10 @@
 # HTTP
 
+## TODO
+- Cleanup
+- Management UI
+- Documentation
+
 Docker compose commands
 
 ```
