@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     serverElement.innerText = req.getResponseHeader("x-hostname");
 })
 
-window.setInterval(() => {
+const interval = window.setInterval(() => {
     fetch('/dynamic/now/')
         .then((response) => {
             return response.json()
@@ -18,6 +18,7 @@ window.setInterval(() => {
             element.innerText = d.toLocaleString()
         })
         .catch(error => {
-            console.log(error)
+            element.innerText = "not known (server could not be reached, are you sure the dynamic server is running ?)"
+            clearInterval(interval)
         })
 }, 2000)
