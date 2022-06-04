@@ -14,6 +14,12 @@ import HelloWorld from '@/components/HelloWorld.vue'
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <router-link :to="'/home'" class="nav-link">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost/static">Static server</a>
+        </li>      
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost/dynamic">Dynamic server</a>
         </li>      
       </ul>
       <form class="d-flex" role="search">

@@ -36,5 +36,5 @@ app.post("/stop/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Dynamic app listening on port ${port}`)
+    console.log(`Managment ui api ${port}`)
 });

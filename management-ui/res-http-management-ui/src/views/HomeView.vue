@@ -9,12 +9,12 @@ export default {
     startContainer: function (event, containerID) {
       const button = event.target;
       button.disabled = true;
-      this.doFetch("http://localhost:3000/start/" + containerID, { "method": "POST" }).then(() => { button.disabled = false; return true; }).catch(() => { button.disabled = false; return false; })
+      this.doFetch("start/" + containerID, { "method": "POST" }).then(() => { button.disabled = false; return true; }).catch(() => { button.disabled = false; return false; })
     },
     stopContainer: function (event, containerID) {
       const button = event.target;
       button.disabled = true;
-      this.doFetch("http://localhost:3000/stop/" + containerID, { "method": "POST" }).then(() => { button.disabled = false; return true; }).catch(() => { button.disabled = false; return false; })
+      this.doFetch("stop/" + containerID, { "method": "POST" }).then(() => { button.disabled = false; return true; }).catch(() => { button.disabled = false; return false; })
     },
     doFetch: function (url, params) {
       return fetch(url, params);
@@ -48,7 +48,7 @@ export default {
   },
   mounted() {
     const refreshContainerData = () => {
-      fetch("http://localhost:3000/get-containers", { "method": "POST" })
+      fetch("get-containers", { "method": "POST" })
         .then((response) => {
           return response.json()
         })
