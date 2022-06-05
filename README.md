@@ -80,6 +80,7 @@ const interval = window.setInterval(() => {
 }, 2000)
 ```
 This simple JS code makes a request every 2 seconds to the dynamic server to ask for the current time it then updates the DOM to display the time in a human readable format.
+We use the fetch API to make requests as, for what we do here, it essentialy does the same thing as jQuery's AJAX features, but with a lot less overhead.
 
 We added the route `/now` to the dynmic servers. It simply adds the current server time to the returned json
 ```js
@@ -89,7 +90,9 @@ app.get('/now', (req, res) => {
 })
 ```
 
-> Why use a reverse proxy for that ?
+The use of a reverse proxy is great in terms of security because we only expose one server to the internet (generally in the DMZ) and then the reverse proxy itself has access to all the services 
+(and their replicas). This creates a bottleneck which is positive in terms of security, as it allows to easily add a firewall and/or a WAF in between the DMZ and the LAN.
+This however, means that the reverse proxy alone can bring an entire service down if it stops working. Although very rare because of the light workloads these appliance receive (basically forward UDP packets), it's a risk that needs to be take into account.
 
 ## Step 5 (Dynamic reverse proxy configuration)
 To create dynamic reverse-proxy we decided to use [traefik](https://traefik.io/)
